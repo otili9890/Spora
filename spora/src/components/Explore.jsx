@@ -1,26 +1,48 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../config/firestore';
+import Register from './Register';
 
+const testUserProfiles = [
+  { id: 1, name: 'Jane Simpson' },
+  { id: 2, name: 'Eliza Cleary' },
+  { id: 3, name: 'Sam Wednesday' },
+];
 
 function Explore() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [userProfiles, setUserProfiles] = useState([{}]);
+  const [isAdding, setIsAdding] = useState(false);
 
-  const profiles = [
-    { id: 1, name: 'Jane Simpson' },
-    { id: 2, name: 'Eliza Cleary' },
-    { id: 3, name: 'Sam Wednesday' },
-  ];
+  
+
+  const getProfiles = async () => {
+    const querySnapshot = await getDocs(collection(db, "userProfiles"))
+    const profiles = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
+    setUserProfiles(profiles)
+  }
+
+  useEffect(() => {
+    getProfiles()
+  }, [])
 
   return (
     <>
       <h1>Explore</h1>
       <ul>
-        {profiles.map((profile) => (
+        {userProfiles.map((profile) => (
           <li key={profile.id}>
-            <Link to={`/explore/${profile.id}`}><h2>{profile.name}</h2></Link>
+            <Link to={`/explore/${profile.id}`}><h2>{profile.userName}</h2></Link>
           </li>
         ))}
       </ul>
+
+      <Register 
+        profiles={userProfiles}
+        setProfiles={setUserProfiles}
+        setIsAdding={setIsAdding}
+      />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}

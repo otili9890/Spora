@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { collection, getDocs } from "firebase/firestore"; 
+import Register from './Register';
 
 function Dashboard() {
   const [count, setCount] = useState(0)
