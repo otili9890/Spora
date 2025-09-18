@@ -1,9 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 function Profile() {
   const [count, setCount] = useState(0)
   const {id} = useParams();
+
+  // For ensuring responsiveness to different ids
+  // useEffect(() => {
+  //   fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+  //   .then((response) => response.json())
+  //   .then((data) => setProfile(data))
+  //   .catch((error) => console.error(error));
+  // }, [id])
 
   return (
     <>
