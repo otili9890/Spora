@@ -3,8 +3,9 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 // import Navbar from './components/Navbar.jsx'
 import './App.css'
 import Navbar from './components/Navbar'
-import Dashboard from './components/Dashboard'
-import Explore from './components/Explore'
+import Dashboard from './routes/Dashboard'
+import Explore from './routes/Explore'
+import Home from './routes/Home'
 import Profile from './components/Profile'
 import NotFoundPage from './components/NotFoundPage'
 
@@ -18,6 +19,7 @@ function App() {
         <div className='min-h-screen flex flex-col bg-green-50'>
           
           <Routes>
+            <Route path="/" element={<Home />}/>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/explore/:id" element={<Profile />} />

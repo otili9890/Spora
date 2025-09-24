@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../config/firestore';
-import Register from './Register';
 
 const testUserProfiles = [
   { id: 1, name: 'Jane Simpson' },
@@ -38,11 +37,7 @@ function Explore() {
         ))}
       </ul>
 
-      <Register 
-        profiles={userProfiles}
-        setProfiles={setUserProfiles}
-        setIsAdding={setIsAdding}
-      />
+      
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
