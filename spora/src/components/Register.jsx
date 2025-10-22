@@ -91,12 +91,6 @@ const Register = ({ profiles, setProfiles, setIsAdding }) => {
           value={email}
           onChange={e => setEmail(e.target.value)}
         /><br></br>
-         {/* <input
-          id="date"
-          type="text hidden"
-          name="date"
-          value={Date().toString()}
-        /> */}
         <label htmlFor="skillShare">Skills You'd Like to Share (Please separate with a comma)</label> 
         <input
           id="skillShare"

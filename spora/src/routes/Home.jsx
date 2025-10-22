@@ -11,16 +11,18 @@ function Home() {
   return (
     <div className="small-container">
         <h1>Home</h1>
+        
+        {isAuthenticated ? (
+        <Dashboard setIsAuthenticated={setIsAuthenticated} />
+      ) : (
+        <>
+          <Login setIsAuthenticated={setIsAuthenticated} />
+        <br></br>
         <Register 
             profiles={userProfiles}
             setProfiles={setUserProfiles}
             setIsAdding={setIsAdding}
           />
-        {isAuthenticated ? (
-        <Dashboard setIsAuthenticated={setIsAuthenticated} />
-      ) : (
-        <>
-          {/* <Login setIsAuthenticated={setIsAuthenticated} /> */}
           
         </>
       )}

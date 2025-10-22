@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import AuthProvider from './AuthProvider';
 
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -16,6 +17,7 @@ const Login = ({ setIsAuthenticated }) => {
     if (document.activeElement.name === 'Login') {
       try {
         await signInWithEmailAndPassword(auth, email, password)
+
         Swal.fire({
           timer: 1500,
           showConfirmButton: false,
@@ -24,6 +26,7 @@ const Login = ({ setIsAuthenticated }) => {
           },
           willClose: () => {
             setIsAuthenticated(true);
+            // loginAction({ email, password });
   
             Swal.fire({
               icon: 'success',
