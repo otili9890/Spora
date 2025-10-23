@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../config/firestore';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
+import { LatLng } from 'leaflet';
 
 const testUserProfiles = [
   { id: 1, name: 'Jane Simpson' },
@@ -39,43 +40,95 @@ function Explore() {
     getProfiles()
   }, [])
 
+  function Skills({ profile }) {
+    if (!profile.skillShare && !profile.skillLearn) {
+      return;
+    } else {
+      // if (profile.skillShare.length >= 0) {
+        return (
+          <div class="flex">
+            {profile.skillShare ?
+                <div class="w-1/2">
+                <h2 class="underline">Sharing</h2>
+                <p>{profile.skillShare}</p>
+              {/* <ul>
+                {profile.skillShare.map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul> */}
+              </div>
+              : null
+            }
+            {profile.skillLearn ?
+            <div class="w-1/2">
+              <h2 class="underline">Seeking</h2>
+              <p>{profile.skillLearn}</p>
+              {/* <ul>
+                {profile.skillLearn.map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul> */}
+            </div>
+            : null
+            }
+          
+          </div>
+        )}
+  }
+
+  function Markers(profile) {
+    try {
+      if (profile.location.latitude && profile.location.longitude) {
+        return (
+          <Marker position={new LatLng(profile.location.latitude, profile.location.longitude)}>
+            <Popup>
+              {profile.username}
+            </Popup>
+          </Marker>  
+          )
+      }
+    } catch (error) {
+      console.log("Issue with ", profile, error);
+      return
+    }
+  }
+  
+
   return (
     <>
       <h1>Explore</h1>
-      <ul>
-        {userProfiles.map((profile) => (
-          <li key={profile.id}>
-            <Link to={`/explore/${profile.id}`}><h2>{profile.username}</h2></Link>
-          </li>
-        ))}
-        <h1>Map</h1>
+      <div class="flex">
+        <div class="min-w-1/4 w-1/4">
+        <ul>
+          {userProfiles.map((profile) => (
+            <div class="bg-white border-solid rounded-sm border-2 m-2 border-black">
+              <li key={profile.id}>
+                <Link to={`/explore/${profile.id}`}><h2>{profile.username}</h2></Link>
+              </li>
+              <p>{profile.bio}</p>
+              <Skills profile={profile} />
+              <a href={profile.email}>{profile.email}</a>
+            </div>
+          ))}
+        </ul>
+        </div>
+        <div class="grow">
         <MapContainer center={coords} zoom={13}>
           <TileLayer 
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-
-          {testMarkers.map((marker) => (
-            <Marker position={marker.geocode}>
-              <Popup>
-                {marker.popUp}
-              </Popup>
-            </Marker>
-          ))}
+          {/* <MarkerClusterGroup chunkedLoading> */}
+            {userProfiles.map((uProfile) => (
+              <Markers profile={uProfile} />
+           
+            ))}
+          {/* </MarkerClusterGroup> */}
         </MapContainer>
-        {/* <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker position={[51.505, -0.09]}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-        </MapContainer> */}
+        </div>
+      </div>
 
-      </ul>
+      
 
       
       <div className="card">

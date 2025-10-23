@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { doc, setDoc, collection, addDoc } from "firebase/firestore"; 
 import { db } from '../config/firestore';
 import Swal from 'sweetalert2';
+import Geocoder from './Geocoder';
 
 // await setDoc(doc(db, "userProfiles", "new-city-id"), data);
 // import Swal from 'sweetalert2';
