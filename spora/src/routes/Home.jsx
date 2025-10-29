@@ -9,8 +9,10 @@ function Home() {
   const [isAdding, setIsAdding] = useState(false);
 
   return (
-    <div className="small-container">
-        <h1>Home</h1>
+    <>
+    <h1>Home</h1>
+    <div class="flex">
+        <br></br>
         
         {isAuthenticated ? (
         <Dashboard setIsAuthenticated={setIsAuthenticated} />
@@ -27,6 +29,7 @@ function Home() {
         </>
       )}
         </div>
+        </>
   );
 };
 

@@ -18,7 +18,7 @@ function App() {
       <div className='h-screen w-screen left-0 top-0 fixed'>
           <AuthProvider>
             <Navbar />
-            <div className='min-h-screen flex flex-col bg-green-50'>
+            <div className='min-h-screen flex flex-col bg-[#fcf1d9]'>
               
               <Routes>
                 <Route path="/" element={<Home />}/>

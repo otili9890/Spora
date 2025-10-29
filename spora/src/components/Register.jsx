@@ -64,10 +64,13 @@ const Register = ({ profiles, setProfiles, setIsAdding }) => {
   };
 
   return (
-    <div className="small-container">
-      <form onSubmit={handleAdd}>
-        <h1>Register</h1>
-        <label htmlFor="username">User Name</label>
+    <>
+    
+    <div class="small-container">
+      <h1>Register</h1><br></br>
+      <form onSubmit={handleAdd} class=""> 
+        
+        <label htmlFor="username">User Name </label>
         <input
           id="username"
           type="text"
@@ -75,7 +78,7 @@ const Register = ({ profiles, setProfiles, setIsAdding }) => {
           value={username}
           onChange={e => setUsername(e.target.value)}
         /><br></br>
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Password </label>
         <input
           id="password"
           type="password"
@@ -84,7 +87,7 @@ const Register = ({ profiles, setProfiles, setIsAdding }) => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         /><br></br>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Email </label>
         <input
           id="email"
           type="email"
@@ -92,7 +95,7 @@ const Register = ({ profiles, setProfiles, setIsAdding }) => {
           value={email}
           onChange={e => setEmail(e.target.value)}
         /><br></br>
-        <label htmlFor="skillShare">Skills You'd Like to Share (Please separate with a comma)</label> 
+        <label htmlFor="skillShare">Skills You'd Like to Share (Please separate with a comma) </label> 
         <input
           id="skillShare"
           type="text"
@@ -100,7 +103,7 @@ const Register = ({ profiles, setProfiles, setIsAdding }) => {
           value={skillShare}
           onChange={e => setSkillShare(e.target.value)}
         /><br></br>
-        <label htmlFor="skillLearn">Skills You'd Like to Learn (Please separate with a comma)</label>
+        <label htmlFor="skillLearn">Skills You'd Like to Learn (Please separate with a comma) </label>
         <input
           id="skillLearn"
           type="text"
@@ -108,7 +111,7 @@ const Register = ({ profiles, setProfiles, setIsAdding }) => {
           value={skillLearn}
           onChange={e => setSkillLearn(e.target.value)}
         /><br></br>
-        <label htmlFor="location">Which suburb are you located? (Or where would you like to interact with others?)</label>
+        <label htmlFor="location">Which suburb are you located? (Or where would you like to interact with others?) </label>
         <input
           id="location"
           type="text"
@@ -116,7 +119,7 @@ const Register = ({ profiles, setProfiles, setIsAdding }) => {
           value={location}
           onChange={e => setLocation(e.target.value)}
         /><br></br>
-        <label htmlFor="bio">Please share your bio</label>
+        <label htmlFor="bio">Please share your bio </label>
         <input
           id="bio"
           type="text"
@@ -136,6 +139,7 @@ const Register = ({ profiles, setProfiles, setIsAdding }) => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 
